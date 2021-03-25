@@ -9,14 +9,13 @@ public:
 	IntArray() = default;
 	IntArray(int langth) : m_langth(langth)
 	{
-		if (langth == 0)
-		{
-			throw "The length is zero!";
-		}
-
-		if (langth > 0)
+		if (langth >= 0)
 		{
 			m_data = new int[langth] {};
+		}
+		else
+		{
+			throw "Bad_length";
 		}
 	}
 	virtual ~IntArray()
@@ -86,24 +85,19 @@ public:
 
 	void insertBefore(int value, int index)
 	{
-		// Sanity check our index value
+		
 		if (index >= 0 && index <= m_langth)
 		{
-			// First create a new array one element larger than the old array
 			int* data{ new int[m_langth + 1] };
 
-			// Copy all of the elements up to the index
 			for (int before{ 0 }; before < index; ++before)
 				data[before] = m_data[before];
 
-			// Insert our new element into the new array
 			data[index] = value;
 
-			// Copy all of the values after the inserted element
 			for (int after{ index }; after < m_langth; ++after)
 				data[after + 1] = m_data[after];
 
-			// Finally, delete the old array, and use the new array instead
 			delete[] m_data;
 			m_data = data;
 			++m_langth;
@@ -116,28 +110,22 @@ public:
 
 	void remove(int index)
 	{
-		// Sanity check our index value
 		if (index >= 0 && index <= m_langth)
 		{
-			// If we're removing the last element in the array, we can just erase the array and return early
 			if (m_langth == 1)
 			{
 				erase();
 				return;
 			}
 
-			// First create a new array one element smaller than the old array
 			int* data{ new int[m_langth - 1] };
 
-			// Copy all of the elements up to the index
 			for (int before{ 0 }; before < index; ++before)
 				data[before] = m_data[before];
 
-			// Copy all of the values after the removed element
 			for (int after{ index + 1 }; after < m_langth; ++after)
 				data[after - 1] = m_data[after];
 
-			// Finally, delete the old array, and use the new array instead
 			delete[] m_data;
 			m_data = data;
 			--m_langth;
@@ -148,7 +136,6 @@ public:
 		}
 	}
 
-	// A couple of additional functions just for convenience
 	void insertAtBeginning(int value) { insertBefore(value, 0); }
 	void insertAtEnd(int value) { insertBefore(value, m_langth); }
 

@@ -9,48 +9,51 @@ using namespace std;
 int main()
 {
     int r_m;
-    // 
+    int index;
+    int remuve_;
+    int aa;
    
-     IntArray array(10);
+    cout << "Enter the length of the array:" << endl;
+    cin >> aa;
+
+    try
+    {
+        IntArray array1(aa);
+
+        for (int i{ 0 }; i < aa; ++i)
+            array1[i] = i + 1;
+
+        // Уменьшить размер массива на r_m
+        cout << "To which element to reduce the array" << endl;
+        cin >> r_m;
+
+        array1.resize(r_m);
+
+        //Вставить 20 после элемента index 
+        cout << "After which element to insert the number 20" << endl;
+        cin >> index;
+
+        array1.insertBefore(20, index);
+
+        // Удалить элемент с индексом remove 
+        cout << "Delete an item with an index" << endl;
+        cin >> remuve_;
+
+        array1.remove(remuve_);
+
+
+        // Добавить 30 и 40 в конце и начале массива
+        array1.insertAtEnd(30);
+        array1.insertAtBeginning(40);
+
+        for (int i{ 0 }; i < array1.getLength(); ++i)
+            std::cout << array1[i] << ' ';
+    }
+    catch (const char* exception)
+    {
+        cout << "Exception: " << exception << endl;
+    }
       
-    // Fill the array with numbers 1 through 10
-    for (int i{ 0 }; i < 10; ++i)
-        array[i] = i + 1;
-
-    // Resize the array to 8 elements
-    cout << "To which element to reduce the array" << endl;
-    cin >> r_m;
-
-    array.resize(r_m);
-
-    // Insert the number 20 before element with index 5
-     try
-     {
-         array.insertBefore(20, 5);
-     }
-     catch (const char* exception)
-     {
-         cout << "Exception: " << exception << endl;
-     }
-
-    // Remove the element with index 3
-     try
-     {
-         array.remove(3);
-     }
-     catch (const char* exception)
-     {
-         cout << "Exception: " << exception << endl;
-     }
-
-    // Add 30 and 40 to the end and beginning
-    array.insertAtEnd(30);
-    array.insertAtBeginning(40);
-
-    // Print out all the numbers
-    for (int i{ 0 }; i < array.getLength(); ++i)
-        std::cout << array[i] << ' ';
-
     std::cout << '\n';
 
     return 0;
